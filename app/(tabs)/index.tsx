@@ -1,21 +1,41 @@
+import { SongTile } from '@/components/SongTile';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { playlist } from '@/mocks'
+import { router } from 'expo-router'
+import { ScrollView, View } from 'react-native'
 import { StyleSheet } from 'react-native-unistyles';
 
-export default function HomeScreen() {
+export default function PlaylistScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">
-        Home Screen
-      </ThemedText>
-    </ThemedView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.header}>
+          <ThemedText type="title">
+            Playlist
+          </ThemedText>
+        </View>
+        {playlist.map(song => (
+          <SongTile
+            song={song}
+            onPress={() => router.push(`/(tabs)/player/${song.id}`)}
+            key={song.id}
+          />
+        ))}
+      </ScrollView>
+    </View>
   );
 }
 
-const styles = StyleSheet.create(theme => ({
+const styles = StyleSheet.create((theme, rt) => ({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: rt.insets.top + theme.gap(3),
+    backgroundColor: theme.colors.background
   },
+  contentContainer: {
+    gap: theme.gap(3),
+    paddingHorizontal: theme.gap(2)
+  },
+  header: {
+    paddingBottom: theme.gap(2)
+  }
 }));

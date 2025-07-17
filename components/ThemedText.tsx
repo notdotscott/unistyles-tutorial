@@ -6,9 +6,15 @@ export type ThemedTextProps = TextProps & UnistylesVariants<typeof styles>;
 export function ThemedText({
   style,
   type,
+  bold,
+  dimmed,
   ...rest
 }: ThemedTextProps) {
-  styles.useVariants({ type })
+  styles.useVariants({
+    type,
+    bold,
+    dimmed,
+  })
 
   return (
     <Text
@@ -33,26 +39,30 @@ const styles = StyleSheet.create(theme => ({
           fontSize: 16,
           lineHeight: 24,
         },
-        defaultSemiBold: {
-          fontSize: 16,
-          lineHeight: 24,
-          fontWeight: '600',
-        },
         title: {
           fontSize: 32,
           fontWeight: 'bold',
           lineHeight: 32,
         },
         subtitle: {
-          fontSize: 20,
-          fontWeight: 'bold',
+          fontSize: 20
         },
         link: {
           lineHeight: 30,
           fontSize: 16,
-          color: theme.colors.link
+          color: '#0a7ea4',
         },
+      },
+      bold: {
+        true: {
+          fontWeight: 'bold',
+        }
+      },
+      dimmed: {
+        true: {
+          color: theme.colors.tint
+        }
       }
     }
-  },
+  }
 }));

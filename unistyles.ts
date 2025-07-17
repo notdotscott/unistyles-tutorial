@@ -51,10 +51,12 @@ const breakpoints = {
   md: 500,
   lg: 800,
   xl: 1200,
-}
+};
 
-type AppBreakpoints = typeof breakpoints
-type AppThemes = typeof appThemes
+export type Accents = keyof typeof lightTheme['colors']['accents'];
+
+type AppBreakpoints = typeof breakpoints;
+type AppThemes = typeof appThemes;
 
 declare module 'react-native-unistyles' {
   export interface UnistylesThemes extends AppThemes { }
